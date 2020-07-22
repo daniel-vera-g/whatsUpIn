@@ -1,0 +1,12 @@
+product
+
+customize list
+track current city
+select city, country, state,...
+select different topics
+
+dev
+
+tests
+  implement tests
+  document readme
