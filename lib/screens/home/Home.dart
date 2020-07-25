@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'widgets/simple_button/index.dart';
 
 
-class Feature extends StatelessWidget {
+class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class Feature extends StatelessWidget {
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new SimpleButton(),
+              new Text("WhatsUpIn?")
             ],
           )
         )
