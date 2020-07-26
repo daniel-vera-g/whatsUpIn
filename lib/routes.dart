@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'screens/home/index.dart';
+import 'screens/home/Home.dart';
 
 class Routes {
 
   Routes() {
     runApp(new MaterialApp(
-      title: 'WhatsUpIn',
+      title: 'WhatsUpIn?',
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: new Home(),
     ));
   }
