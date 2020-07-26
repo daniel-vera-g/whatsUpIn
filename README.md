@@ -24,7 +24,7 @@ To run it locally you'll need to install ![flutter](flutter.dev/).
 
 ### Prerequisites
 
-* ![Flutter](Flutter.dev/)
+- ![Flutter](Flutter.dev/)
 
 ### Installing
 
