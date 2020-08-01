@@ -1,45 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:whatsUpIn/models/news/News.dart';
-import '../../api/news/NewsAPI.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:whatsUpIn/bloc/bloc.dart';
 
-class Home extends StatefulWidget {
-  Home({Key key}) : super(key: key);
-
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  Future<News> futureNews;
-
-  @override
-  void initState() { 
-    super.initState();
-    futureNews = fetchNews(); 
-  }
+class Home extends StatelessWidget {
+  const Home({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Latest news:"),
-      ),
-      body: new Container(
-        child: new Center(
-          child: FutureBuilder(
-            future: futureNews,
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return (snapshot.data.Title);
-              } else if(snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-
-              return CircularProgressIndicator();
-            },
-          ),
-        )
-      )
+    return BlocBuilder<NewsBloc, NewsState>(
+      builder: (context, state) {
+        // Iterate through different states and load right information
+        if (state is NewsEmpty) {
+          BlocProvider.of<NewsBloc>(context).add(FetchNews()); 
+        }
+        if (state is NewsError) {
+          return Center(
+            child: Text('Failed to fetch News'),
+          );
+        }
+        if(state is NewsLoaded) {
+          return ListTile(
+            leading: Text(
+              // TODO add id or something alike
+              "News Item:"
+            ),
+            title: Text(state.news.title),
+            isThreeLine: true,
+            subtitle: Text(state.news.description),
+            dense: true,
+          );
+        } 
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }
