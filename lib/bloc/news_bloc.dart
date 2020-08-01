@@ -13,15 +13,15 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   NewsState get initialState => NewsEmpty();
 
   @override
-  Strem<NewsState>  mapEventToState(NewsEvent event) async* {
+  Stream<NewsState>  mapEventToState(NewsEvent event) async* {
     if (event is FetchNews) {
       yield NewsLoading();
       try {
-        final News news = await repository.fetchNews(); 
+        final News news = await repository.fetchNews();
         yield NewsLoaded(news: news);
-      } catch (_) {
+      } catch () {
         yield NewsError();
       }
-    } 
+    }
   }
 }
